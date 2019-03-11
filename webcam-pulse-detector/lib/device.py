@@ -2,6 +2,9 @@ import cv2, time
 #TODO: fix ipcam
 #import urllib2, base64
 import numpy as np
+import os
+
+os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp"
 
 extCameraURL = "rtsp://192.168.1.90/"
 
