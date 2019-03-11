@@ -3,6 +3,8 @@ import cv2, time
 #import urllib2, base64
 import numpy as np
 
+extCameraURL = "rtsp://192.168.1.90/"
+
 class ipCamera(object):
 
     def __init__(self,url, user = None, password = None):
@@ -21,7 +23,7 @@ class ipCamera(object):
 class Camera(object):
 
     def __init__(self, camera = 0):
-        self.cam = cv2.VideoCapture(camera)
+        self.cam = cv2.VideoCapture(extCameraURL)
         self.valid = False
         try:
             resp = self.cam.read()
