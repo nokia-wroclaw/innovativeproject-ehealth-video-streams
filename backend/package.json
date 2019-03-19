@@ -1,0 +1,27 @@
+{
+  "name": "ehealth-video-streams-backend",
+  "version": "1.0.0",
+  "description": "Innovative project e-health video streams backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev-start": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nokia-wroclaw/innovativeproject-ehealth-video-streams.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nokia-wroclaw/innovativeproject-ehealth-video-streams/issues"
+  },
+  "homepage": "https://github.com/nokia-wroclaw/innovativeproject-ehealth-video-streams#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
