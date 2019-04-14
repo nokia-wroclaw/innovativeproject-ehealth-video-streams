@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  /* background: #ffeaa7; */
+  /* background: #dfe6e9; */
+  /*background: #f5f6fa;*/
+  font-family: 'Titillium Web', 'Lato', sans-serif;
 }
 
 .App-logo {
@@ -30,4 +34,22 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.nav-color {
+  /* background: #dfe6e9; */
+  /* background: #dcdde1 */
+  background: url('./whirlpool.png');
+  /* background: white */
+}
+
+.content-color {
+  /*background: #f5f6fa;*/
+  /* background: #ffeaa7; */
+  /* background: url('./vertical-waves.png'); */
+  /* background: #dfe6e9; */
+}
+
+h1 {
+  font-weight: bold;
 }
