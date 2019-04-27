@@ -2,7 +2,10 @@ package pl.mdados.ehealth.web.controller;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 import pl.mdados.ehealth.model.EmotionReadout;
 import pl.mdados.ehealth.model.PulseReadout;
@@ -34,17 +37,46 @@ public class UserController {
     @GetMapping
     public Flux<UserReadResponse> getAll(Authentication authentication) {
         UserCredentials userCredentials = (UserCredentials)authentication.getPrincipal();
-        System.out.println(userCredentials.getUserId());
+        userCredentials.getAuthorities().forEach(System.out::println);
         return userService.findAll().map(UserReadResponse::fromUser);
     }
+
+
     @GetMapping("/{id}")
     public Mono<UserReadResponse> getById(@PathVariable String id) {
         return UserReadResponse.fromUser(userService.findById(id));
     }
 
+    @DeleteMapping("/{id}")
+    public Mono<ResponseEntity> deleteById(@PathVariable String id, Authentication authentication) {
+        UserCredentials userCredentials = (UserCredentials)authentication.getPrincipal();
+
+        if(!isAuthorizedToDeleteUser(id, userCredentials)) {
+            return Mono.just(ResponseEntity.status(HttpStatus.FORBIDDEN).body(null));
+        }
+
+        return userService.deleteById(id).map(aVoid -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(null));
+    }
+
+    @GetMapping("/{name}/byName")
+    public Mono<ResponseEntity<UserReadResponse>> getByName(@PathVariable String name, Authentication authentication) {
+        UserCredentials userCredentials = (UserCredentials)authentication.getPrincipal();
+        return userService.findById(userCredentials.getUserId())
+                .map(user -> {
+                    if(user.getName().equals(name)) {
+                        return ResponseEntity
+                                .status(HttpStatus.OK)
+                                .body(UserReadResponse.fromUser(user));
+                    } else {
+                        return ResponseEntity
+                                .status(HttpStatus.FORBIDDEN)
+                                .body(null);
+                    }
+                });
+    }
+
     @PostMapping
     public Mono<UserReadResponse> save(@RequestBody UserCreateRequest user) {
-
         return UserReadResponse.fromUser(userService.save(user.toUser()));
     }
 
@@ -115,5 +147,10 @@ public class UserController {
             @RequestBody AddCommentRequest addCommentRequest
     ) {
         return emotionService.addComment(emotionId,addCommentRequest.getComment());
+    }
+
+    private boolean isAuthorizedToDeleteUser( String id, UserCredentials userCredentials) {
+        return userCredentials.getUserId().equals(id)
+                || userCredentials.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"));
     }
 }
