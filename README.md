@@ -50,6 +50,11 @@ Application uses http basic authentication.
     * _GET_ /{id}
         * Returns user details
         * Authenticated
+    * _DELETE_ /{id}
+        * Authenticated
+    * _GET_ /{name}/byName
+        * Returns user details of a user with specified name
+        * Authenticated
     * _GET_ /{id}/emotions?(page=number&size=number&sort=string&direction=(asc|desc))
         * Returns page with emotions list
         * page, size, sort, direction - are optional
