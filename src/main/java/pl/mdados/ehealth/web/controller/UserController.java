@@ -21,6 +21,7 @@ import pl.mdados.ehealth.web.response.UserReadResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
