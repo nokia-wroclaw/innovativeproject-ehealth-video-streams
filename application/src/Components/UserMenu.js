@@ -1,5 +1,6 @@
 import React from "react";
 import { handleResponse, deleteUser } from "../Shared/services"
+import "../App.css"
 
 const UserMenu = (props) => {
     return (
@@ -12,7 +13,8 @@ const UserMenu = (props) => {
                     data-toggle="dropdown" 
                     aria-haspopup="true" 
                     aria-expanded="false">
-                <i className="fas fa-user fa-lg" />
+                    <i className="fas fa-user fa-lg" /> 
+                    <span className="user-name">{props.userInfo.auth.username}</span>
                 </button>
                 <div className="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
                 <button 
