@@ -22,6 +22,11 @@ public class BasicPulseService implements PulseService {
     }
 
     @Override
+    public Flux<PulseReadout> getPulsesByUserId(String id) {
+        return pulseRepository.findAllByUserId(id);
+    }
+
+    @Override
     public Mono<PulseReadout> save(PulseReadout pulseReadout) {
         return pulseRepository.save(pulseReadout);
     }

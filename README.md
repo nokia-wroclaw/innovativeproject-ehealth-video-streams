@@ -59,6 +59,9 @@ Application uses http basic authentication.
         * Returns page with emotions list
         * page, size, sort, direction - are optional
         * Authenticated
+    * _GET_ /{id}/emotions/all
+        * Returns all emotions
+        * Authenticated
     * _POST_ /{id}/emotions
         * Saves emotion data
         * Authenticated
@@ -77,6 +80,9 @@ Application uses http basic authentication.
     * _GET_ /{id}/pulses?(page=number&size=number&sort=string&direction=(asc|desc)) 
         * Returns page with pulses list
         * page, size, sort, direction - are optional
+        * Authenticated
+    * _GET_ /{id}/pulses/all
+        * Return all pulses
         * Authenticated
     * _POST_ /{id}/pulses
         * Saves pulse data

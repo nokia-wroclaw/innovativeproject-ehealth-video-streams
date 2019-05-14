@@ -17,7 +17,12 @@ public class BasicEmotionService implements EmotionService {
 
     @Override
     public Flux<EmotionReadout> getEmotionsByUserId(String id, Pageable pageable) {
-        return emotionRepository.findAllByUserId(id, pageable);
+        return emotionRepository.findPageByUserId(id, pageable);
+    }
+
+    @Override
+    public Flux<EmotionReadout> getEmotionsByUserId(String id) {
+        return emotionRepository.findPageByUserId(id);
     }
 
     @Override

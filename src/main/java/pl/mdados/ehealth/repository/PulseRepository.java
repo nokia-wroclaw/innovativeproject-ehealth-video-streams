@@ -10,4 +10,5 @@ import reactor.core.publisher.Flux;
 @Repository
 public interface PulseRepository extends ReactiveMongoRepository<PulseReadout, String> {
     Flux<PulseReadout> findAllByUserId(String userId, Pageable pageable);
+    Flux<PulseReadout> findAllByUserId(String userId);
 }

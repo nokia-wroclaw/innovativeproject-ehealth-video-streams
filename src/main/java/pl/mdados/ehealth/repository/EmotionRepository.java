@@ -7,5 +7,6 @@ import reactor.core.publisher.Flux;
 
 
 public interface EmotionRepository extends ReactiveMongoRepository<EmotionReadout, String> {
-    Flux<EmotionReadout> findAllByUserId(String userId, Pageable pageable);
+    Flux<EmotionReadout> findPageByUserId(String userId, Pageable pageable);
+    Flux<EmotionReadout> findPageByUserId(String userId);
 }

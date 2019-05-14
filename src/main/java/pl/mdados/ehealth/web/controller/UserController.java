@@ -21,7 +21,7 @@ import pl.mdados.ehealth.web.response.UserReadResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
@@ -109,6 +109,16 @@ public class UserController {
                         page,
                         size,
                         Sort.by(Sort.Direction.fromString(direction.toUpperCase()), sort)));
+    }
+
+    @GetMapping("/{id}/emotions/all")
+    public Flux<EmotionReadout> getAllUserEmotions(@PathVariable String id) {
+        return emotionService.getEmotionsByUserId(id);
+    }
+
+    @GetMapping("/{id}/pulses/all")
+    public Flux<PulseReadout> getUserPulses(@PathVariable String id) {
+        return pulseService.getPulsesByUserId(id);
     }
 
     @PostMapping("/{id}/pulses")

@@ -7,6 +7,7 @@ import reactor.core.publisher.Mono;
 
 public interface PulseService {
     Flux<PulseReadout> getPulsesByUserId(String id, Pageable pageable);
+    Flux<PulseReadout> getPulsesByUserId(String id);
     Mono<PulseReadout> save(PulseReadout pulseReadout);
     Mono<PulseReadout> addComment(String pulseId, String comment);
 }
